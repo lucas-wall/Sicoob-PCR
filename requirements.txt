@@ -1,0 +1,5 @@
+streamlit
+gradio
+plotly
+pandas
+numpy
