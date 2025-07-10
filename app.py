@@ -4,6 +4,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+import seaborn as sns
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 import warnings
@@ -226,46 +227,181 @@ def generate_synthetic_data():
     # Dados históricos da carteira (últimos 24 meses)
     dates = pd.date_range(start='2023-01-01', end='2025-06-30', freq='M')
     
-    # Volume da carteira com sazonalidade
-    base_volume = 45000  # R$ milhões
-    seasonal_factor = np.sin(np.arange(len(dates)) * 2 * np.pi / 12) * 0.15 + 1
-    growth_trend = np.linspace(1, 1.25, len(dates))
-    volume_carteira = base_volume * seasonal_factor * growth_trend + np.random.normal(0, 1000, len(dates))
-    
-    carteira_historica = pd.DataFrame({
-        'Data': dates,
-        'Volume_Milhoes': volume_carteira,
-        'Inadimplencia': np.random.normal(6.8, 1.2, len(dates)).clip(3, 12),
-        'Numero_Operacoes': (volume_carteira / 150 + np.random.normal(0, 50, len(dates))).astype(int)
-    })
-    
-    # Dados por linha de crédito
-    linhas_credito = {
-        'Custeio': {'volume': 32000, 'participacao': 60, 'inadimplencia': 6.2},
-        'Investimento': {'volume': 12000, 'participacao': 22, 'inadimplencia': 5.8},
-        'Comercialização': {'volume': 6500, 'participacao': 12, 'inadimplencia': 7.1},
-        'Industrialização': {'volume': 3200, 'participacao': 6, 'inadimplencia': 6.9}
-    }
-    
     # Dados por região
     regioes_data = {
-        'Centro-Oeste': {'volume': 18500, 'cooperativas': 145, 'inadimplencia': 5.9},
-        'Sul': {'volume': 16200, 'cooperativas': 178, 'inadimplencia': 6.1},
-        'Sudeste': {'volume': 12800, 'cooperativas': 156, 'inadimplencia': 6.8},
-        'Nordeste': {'volume': 4200, 'cooperativas': 89, 'inadimplencia': 8.2},
-        'Norte': {'volume': 2000, 'cooperativas': 34, 'inadimplencia': 7.5}
+        'Centro-Oeste': {'volume': 18500, 'cooperativas': 145, 'inadimplencia': 5.9, 'participacao': 0.34},
+        'Sul': {'volume': 16200, 'cooperativas': 178, 'inadimplencia': 6.1, 'participacao': 0.30},
+        'Sudeste': {'volume': 12800, 'cooperativas': 156, 'inadimplencia': 6.8, 'participacao': 0.24},
+        'Nordeste': {'volume': 4200, 'cooperativas': 89, 'inadimplencia': 8.2, 'participacao': 0.08},
+        'Norte': {'volume': 2000, 'cooperativas': 34, 'inadimplencia': 7.5, 'participacao': 0.04}
     }
     
-    # Dados de culturas
-    culturas_data = {
-        'Soja': {'volume': 22000, 'area_mil_ha': 4200, 'inadimplencia': 5.8},
-        'Milho': {'volume': 15000, 'area_mil_ha': 2800, 'inadimplencia': 6.2},
-        'Café': {'volume': 8500, 'area_mil_ha': 1900, 'inadimplencia': 6.9},
-        'Cana-de-açúcar': {'volume': 4200, 'area_mil_ha': 850, 'inadimplencia': 7.1},
-        'Algodão': {'volume': 3800, 'area_mil_ha': 720, 'inadimplencia': 6.5}
+    # Gerar dados históricos por região
+    carteira_historica_completa = []
+    
+    for regiao, dados_regiao in regioes_data.items():
+        base_volume = dados_regiao['volume']
+        base_inadimplencia = dados_regiao['inadimplencia']
+        
+        # Volume com sazonalidade específica por região
+        seasonal_factor = np.sin(np.arange(len(dates)) * 2 * np.pi / 12) * 0.15 + 1
+        growth_trend = np.linspace(1, 1.25, len(dates))
+        volume_regional = base_volume * seasonal_factor * growth_trend + np.random.normal(0, base_volume * 0.02, len(dates))
+        
+        # Inadimplência com variação regional
+        inadimplencia_regional = np.random.normal(base_inadimplencia, 0.8, len(dates)).clip(3, 12)
+        
+        # Número de operações baseado no volume
+        operacoes_regional = (volume_regional / 150 + np.random.normal(0, 20, len(dates))).astype(int)
+        
+        for i, date in enumerate(dates):
+            carteira_historica_completa.append({
+                'Data': date,
+                'Regiao': regiao,
+                'Volume_Milhoes': volume_regional[i],
+                'Inadimplencia': inadimplencia_regional[i],
+                'Numero_Operacoes': operacoes_regional[i]
+            })
+    
+    carteira_historica = pd.DataFrame(carteira_historica_completa)
+    
+    # Dados por linha de crédito (agora com distribuição regional)
+    linhas_credito = {}
+    linhas_base = {
+        'Custeio': {'participacao': 60, 'inadimplencia_base': 6.2},
+        'Investimento': {'participacao': 22, 'inadimplencia_base': 5.8},
+        'Comercialização': {'participacao': 12, 'inadimplencia_base': 7.1},
+        'Industrialização': {'participacao': 6, 'inadimplencia_base': 6.9}
     }
+    
+    for linha, dados_linha in linhas_base.items():
+        linhas_credito[linha] = {}
+        for regiao, dados_regiao in regioes_data.items():
+            volume_linha_regiao = dados_regiao['volume'] * (dados_linha['participacao'] / 100)
+            inadimplencia_linha = dados_linha['inadimplencia_base'] + (dados_regiao['inadimplencia'] - 6.5) * 0.3
+            
+            linhas_credito[linha][regiao] = {
+                'volume': volume_linha_regiao,
+                'inadimplencia': inadimplencia_linha
+            }
+    
+    # Dados de culturas por região
+    culturas_base = {
+        'Soja': {'area_mil_ha': 4200, 'inadimplencia_base': 5.8},
+        'Milho': {'area_mil_ha': 2800, 'inadimplencia_base': 6.2},
+        'Café': {'area_mil_ha': 1900, 'inadimplencia_base': 6.9},
+        'Cana-de-açúcar': {'area_mil_ha': 850, 'inadimplencia_base': 7.1},
+        'Algodão': {'area_mil_ha': 720, 'inadimplencia_base': 6.5}
+    }
+    
+    # Distribuição de culturas por região (percentuais aproximados)
+    distribuicao_culturas = {
+        'Centro-Oeste': {'Soja': 0.45, 'Milho': 0.35, 'Café': 0.05, 'Cana-de-açúcar': 0.10, 'Algodão': 0.05},
+        'Sul': {'Soja': 0.40, 'Milho': 0.30, 'Café': 0.15, 'Cana-de-açúcar': 0.10, 'Algodão': 0.05},
+        'Sudeste': {'Soja': 0.20, 'Milho': 0.25, 'Café': 0.35, 'Cana-de-açúcar': 0.15, 'Algodão': 0.05},
+        'Nordeste': {'Soja': 0.15, 'Milho': 0.20, 'Café': 0.10, 'Cana-de-açúcar': 0.25, 'Algodão': 0.30},
+        'Norte': {'Soja': 0.25, 'Milho': 0.30, 'Café': 0.20, 'Cana-de-açúcar': 0.15, 'Algodão': 0.10}
+    }
+    
+    culturas_data = {}
+    for cultura, dados_cultura in culturas_base.items():
+        culturas_data[cultura] = {}
+        for regiao, dados_regiao in regioes_data.items():
+            participacao_cultura = distribuicao_culturas[regiao][cultura]
+            volume_cultura_regiao = dados_regiao['volume'] * participacao_cultura
+            area_cultura_regiao = dados_cultura['area_mil_ha'] * participacao_cultura
+            inadimplencia_cultura = dados_cultura['inadimplencia_base'] + (dados_regiao['inadimplencia'] - 6.5) * 0.2
+            
+            culturas_data[cultura][regiao] = {
+                'volume': volume_cultura_regiao,
+                'area_mil_ha': area_cultura_regiao,
+                'inadimplencia': inadimplencia_cultura
+            }
     
     return carteira_historica, linhas_credito, regioes_data, culturas_data
+
+# Funções para filtrar dados por região
+def filter_carteira_by_region(carteira_df, regioes_selecionadas):
+    """Filtra dados da carteira pelas regiões selecionadas"""
+    if not regioes_selecionadas or len(regioes_selecionadas) == 0:
+        return carteira_df
+    
+    carteira_filtrada = carteira_df[carteira_df['Regiao'].isin(regioes_selecionadas)]
+    
+    # Agregar dados por data
+    carteira_agregada = carteira_filtrada.groupby('Data').agg({
+        'Volume_Milhoes': 'sum',
+        'Inadimplencia': 'mean',
+        'Numero_Operacoes': 'sum'
+    }).reset_index()
+    
+    return carteira_agregada
+
+def filter_linhas_credito_by_region(linhas_credito, regioes_selecionadas):
+    """Filtra dados de linhas de crédito pelas regiões selecionadas"""
+    if not regioes_selecionadas or len(regioes_selecionadas) == 0:
+        return linhas_credito
+    
+    linhas_filtradas = {}
+    for linha, dados_linha in linhas_credito.items():
+        volume_total = 0
+        inadimplencia_ponderada = 0
+        
+        for regiao in regioes_selecionadas:
+            if regiao in dados_linha:
+                volume_regiao = dados_linha[regiao]['volume']
+                volume_total += volume_regiao
+                inadimplencia_ponderada += dados_linha[regiao]['inadimplencia'] * volume_regiao
+        
+        if volume_total > 0:
+            inadimplencia_media = inadimplencia_ponderada / volume_total
+            linhas_filtradas[linha] = {
+                'volume': volume_total,
+                'inadimplencia': inadimplencia_media
+            }
+    
+    # Calcular participações
+    volume_total_geral = sum([dados['volume'] for dados in linhas_filtradas.values()])
+    for linha in linhas_filtradas:
+        linhas_filtradas[linha]['participacao'] = (linhas_filtradas[linha]['volume'] / volume_total_geral) * 100
+    
+    return linhas_filtradas
+
+def filter_regioes_data_by_region(regioes_data, regioes_selecionadas):
+    """Filtra dados regionais pelas regiões selecionadas"""
+    if not regioes_selecionadas or len(regioes_selecionadas) == 0:
+        return regioes_data
+    
+    return {regiao: dados for regiao, dados in regioes_data.items() if regiao in regioes_selecionadas}
+
+def filter_culturas_by_region(culturas_data, regioes_selecionadas):
+    """Filtra dados de culturas pelas regiões selecionadas"""
+    if not regioes_selecionadas or len(regioes_selecionadas) == 0:
+        return culturas_data
+    
+    culturas_filtradas = {}
+    for cultura, dados_cultura in culturas_data.items():
+        volume_total = 0
+        area_total = 0
+        inadimplencia_ponderada = 0
+        
+        for regiao in regioes_selecionadas:
+            if regiao in dados_cultura:
+                volume_regiao = dados_cultura[regiao]['volume']
+                area_regiao = dados_cultura[regiao]['area_mil_ha']
+                volume_total += volume_regiao
+                area_total += area_regiao
+                inadimplencia_ponderada += dados_cultura[regiao]['inadimplencia'] * volume_regiao
+        
+        if volume_total > 0:
+            inadimplencia_media = inadimplencia_ponderada / volume_total
+            culturas_filtradas[cultura] = {
+                'volume': volume_total,
+                'area_mil_ha': area_total,
+                'inadimplencia': inadimplencia_media
+            }
+    
+    return culturas_filtradas
 
 # Função para criar gráficos
 def create_volume_evolution_chart(df):
@@ -398,10 +534,38 @@ def main():
         default=list(regioes_data.keys())
     )
     
-    # Filtrar dados
-    mask = (carteira_df['Data'] >= pd.to_datetime(periodo_inicio)) & \
-           (carteira_df['Data'] <= pd.to_datetime(periodo_fim))
-    carteira_filtrada = carteira_df.loc[mask]
+    # Aplicar filtros regionais
+    carteira_filtrada_regiao = filter_carteira_by_region(carteira_df, regiao_filtro)
+    linhas_credito_filtradas = filter_linhas_credito_by_region(linhas_credito, regiao_filtro)
+    regioes_data_filtradas = filter_regioes_data_by_region(regioes_data, regiao_filtro)
+    culturas_data_filtradas = filter_culturas_by_region(culturas_data, regiao_filtro)
+    
+    # Filtrar dados por período
+    mask = (carteira_filtrada_regiao['Data'] >= pd.to_datetime(periodo_inicio)) & \
+           (carteira_filtrada_regiao['Data'] <= pd.to_datetime(periodo_fim))
+    carteira_filtrada = carteira_filtrada_regiao.loc[mask]
+    
+    # Mostrar filtros ativos
+    if len(regiao_filtro) < len(regioes_data):
+        st.sidebar.info(f"🔍 Filtro ativo: {', '.join(regiao_filtro)}")
+        
+        # Mostrar impacto dos filtros
+        volume_total_original = sum([dados['volume'] for dados in regioes_data.values()])
+        volume_total_filtrado = sum([dados['volume'] for dados in regioes_data_filtradas.values()])
+        percentual_filtrado = (volume_total_filtrado / volume_total_original) * 100
+        
+        st.sidebar.metric(
+            "Volume Filtrado", 
+            f"R$ {volume_total_filtrado:,.0f} Mi",
+            f"{percentual_filtrado:.1f}% do total"
+        )
+    else:
+        st.sidebar.success("📊 Exibindo todas as regiões")
+    
+    # Indicador visual de filtros ativos na página principal
+    if len(regiao_filtro) < len(regioes_data):
+        st.info(f"🔍 **Filtros Ativos:** Exibindo dados para {', '.join(regiao_filtro)} | "
+                f"Período: {periodo_inicio.strftime('%d/%m/%Y')} a {periodo_fim.strftime('%d/%m/%Y')}")
     
     # KPIs principais
     st.markdown("## 📊 Indicadores Principais")
@@ -464,41 +628,67 @@ def main():
     col1, col2 = st.columns(2)
     
     with col1:
-        fig_linhas = create_linhas_credito_chart(linhas_credito)
+        fig_linhas = create_linhas_credito_chart(linhas_credito_filtradas)
         st.plotly_chart(fig_linhas, use_container_width=True)
     
     with col2:
-        fig_regional = create_regional_analysis(regioes_data)
+        fig_regional = create_regional_analysis(regioes_data_filtradas)
         st.plotly_chart(fig_regional, use_container_width=True)
     
     # Insights e Recomendações
     st.markdown("## 💡 Insights e Recomendações")
     
+    # Gerar insights baseados nos dados filtrados
+    volume_total_filtrado = sum([dados['volume'] for dados in regioes_data_filtradas.values()])
+    inadimplencia_media_filtrada = sum([dados['inadimplencia'] * dados['volume'] for dados in regioes_data_filtradas.values()]) / volume_total_filtrado if volume_total_filtrado > 0 else 0
+    
+    # Identificar região com maior volume nas regiões filtradas
+    regiao_maior_volume = max(regioes_data_filtradas.items(), key=lambda x: x[1]['volume']) if regioes_data_filtradas else None
+    
+    # Identificar cultura com maior volume nas culturas filtradas
+    cultura_maior_volume = max(culturas_data_filtradas.items(), key=lambda x: x[1]['volume']) if culturas_data_filtradas else None
+    
     col1, col2 = st.columns(2)
     
     with col1:
         st.success("🎯 **Oportunidades Identificadas**")
-        st.markdown("""
-        **Expansão no Nordeste:** Região com menor penetração e alto potencial de crescimento (+150%)
+        insights_oportunidades = []
         
-        **Digitalização:** 78% dos produtores demandam soluções digitais integradas
+        if regiao_maior_volume:
+            insights_oportunidades.append(f"**Foco em {regiao_maior_volume[0]}:** Região representa R$ {regiao_maior_volume[1]['volume']:,.0f} Mi do volume filtrado")
         
-        **Produtos ESG:** Crescimento de 45% na demanda por crédito sustentável
+        if cultura_maior_volume:
+            insights_oportunidades.append(f"**Especialização em {cultura_maior_volume[0]}:** Cultura com maior volume (R$ {cultura_maior_volume[1]['volume']:,.0f} Mi)")
         
-        **Seguro Paramétrico:** Redução de 30% no risco climático com tecnologia
-        """)
+        if inadimplencia_media_filtrada < 6.5:
+            insights_oportunidades.append("**Baixo Risco:** Taxa de inadimplência abaixo da média nacional")
+        
+        insights_oportunidades.extend([
+            "**Digitalização:** 78% dos produtores demandam soluções digitais integradas",
+            "**Produtos ESG:** Crescimento de 45% na demanda por crédito sustentável"
+        ])
+        
+        for insight in insights_oportunidades:
+            st.markdown(insight)
     
     with col2:
         st.warning("⚠️ **Pontos de Atenção**")
-        st.markdown("""
-        **Concentração Geográfica:** 65% da carteira concentrada no Centro-Oeste e Sul
+        insights_atencao = []
         
-        **Sazonalidade:** Picos de demanda em março e setembro exigem planejamento
+        if inadimplencia_media_filtrada > 7.0:
+            insights_atencao.append(f"**Alta Inadimplência:** Taxa média de {inadimplencia_media_filtrada:.1f}% nas regiões selecionadas")
         
-        **Risco Climático:** Impacto crescente nas taxas de inadimplência
+        if len(regiao_filtro) == 1:
+            insights_atencao.append("**Concentração Regional:** Análise focada em apenas uma região")
         
-        **Concorrência:** Bancos digitais e fintechs ganhando market share
-        """)
+        insights_atencao.extend([
+            "**Sazonalidade:** Picos de demanda em março e setembro exigem planejamento",
+            "**Risco Climático:** Impacto crescente nas taxas de inadimplência",
+            "**Concorrência:** Bancos digitais e fintechs ganhando market share"
+        ])
+        
+        for insight in insights_atencao:
+            st.markdown(insight)
     
     # Simulador de Cenários
     st.markdown("## 🔮 Simulador de Cenários")
@@ -534,7 +724,7 @@ def main():
     # Análise de Culturas
     st.markdown("## 🌱 Análise por Cultura")
     
-    culturas_df = pd.DataFrame(culturas_data).T
+    culturas_df = pd.DataFrame(culturas_data_filtradas).T
     culturas_df.reset_index(inplace=True)
     culturas_df.rename(columns={'index': 'Cultura'}, inplace=True)
     
@@ -571,8 +761,8 @@ def main():
             idade = st.number_input("Idade", 18, 80, 45, key="idade_input")
             experiencia = st.number_input("Anos de Experiência", 0, 50, 15, key="exp_input")
             area_propriedade = st.number_input("Área da Propriedade (Ha)", 1, 10000, 500, key="area_input")
-            cultura_principal = st.selectbox("Cultura Principal", list(culturas_data.keys()), key="cultura_input")
-            regiao = st.selectbox("Região", list(regioes_data.keys()), key="regiao_input")
+            cultura_principal = st.selectbox("Cultura Principal", list(culturas_data_filtradas.keys()) if culturas_data_filtradas else list(culturas_data.keys()), key="cultura_input")
+            regiao = st.selectbox("Região", regiao_filtro if regiao_filtro else list(regioes_data.keys()), key="regiao_input")
         
         with col2:
             st.subheader("Dados Financeiros")
@@ -592,8 +782,17 @@ def main():
             score_renda = min(40, np.log(renda_anual) * 8)
             
             # Penalizações por risco
-            risco_cultura = culturas_data[cultura_principal]['inadimplencia']
-            risco_regiao = regioes_data[regiao]['inadimplencia']
+            if cultura_principal in culturas_data_filtradas:
+                risco_cultura = culturas_data_filtradas[cultura_principal]['inadimplencia']
+            else:
+                # Fallback para dados originais se não houver dados filtrados
+                risco_cultura = 6.5  # Valor médio
+            
+            if regiao in regioes_data_filtradas:
+                risco_regiao = regioes_data_filtradas[regiao]['inadimplencia']
+            else:
+                risco_regiao = 6.5  # Valor médio
+            
             score_risco = -((risco_cultura + risco_regiao) * 2)
             
             # Histórico
@@ -654,18 +853,23 @@ def main():
     # Relatórios
     st.markdown("## 📋 Relatórios Executivos")
     
-    def generate_performance_report(carteira_df, linhas_credito, regioes_data):
+    def generate_performance_report(carteira_df, linhas_credito, regioes_data, regioes_filtro):
         """Gera relatório de performance em markdown"""
         volume_atual = carteira_df['Volume_Milhoes'].iloc[-1]
         inadimplencia_atual = carteira_df['Inadimplencia'].iloc[-1]
         crescimento = ((volume_atual - carteira_df['Volume_Milhoes'].iloc[0]) / carteira_df['Volume_Milhoes'].iloc[0]) * 100
+        
+        # Informações sobre filtros aplicados
+        filtros_info = ""
+        if len(regioes_filtro) < 5:  # Assumindo 5 regiões totais
+            filtros_info = f"\n- **Regiões Analisadas:** {', '.join(regioes_filtro)}"
         
         report = f"""
 # SICOOB - Relatório de Performance da Carteira Rural
 
 ## Resumo Executivo
 - **Data do Relatório:** {datetime.now().strftime('%d/%m/%Y')}
-- **Período Analisado:** {periodo_inicio.strftime('%d/%m/%Y')} a {periodo_fim.strftime('%d/%m/%Y')}
+- **Período Analisado:** {periodo_inicio.strftime('%d/%m/%Y')} a {periodo_fim.strftime('%d/%m/%Y')}{filtros_info}
 
 ## Indicadores Principais
 - **Volume da Carteira:** R$ {volume_atual:,.0f} milhões
@@ -676,15 +880,14 @@ def main():
 ## Performance por Linha de Crédito
 """
         for linha, dados in linhas_credito.items():
-            report += f"- **{linha}:** R$ {dados['volume']:,} Mi ({dados['participacao']}% da carteira)\n"
+            report += f"- **{linha}:** R$ {dados['volume']:,.0f} Mi ({dados['participacao']:.1f}% da carteira)\n"
         
         report += f"""
 
 ## Distribuição Regional
 """
         for regiao, dados in regioes_data.items():
-            if regiao in regiao_filtro:
-                report += f"- **{regiao}:** R$ {dados['volume']:,} Mi ({dados['cooperativas']} cooperativas)\n"
+            report += f"- **{regiao}:** R$ {dados['volume']:,.0f} Mi ({dados['cooperativas']} cooperativas)\n"
         
         report += f"""
 
@@ -809,7 +1012,7 @@ O SICOOB mantém posição sólida no mercado de crédito rural, com oportunidad
     
     with col1:
         if st.button("📊 Relatório de Performance", type="primary"):
-            report_content = generate_performance_report(carteira_filtrada, linhas_credito, regioes_data)
+            report_content = generate_performance_report(carteira_filtrada, linhas_credito_filtradas, regioes_data_filtradas, regiao_filtro)
             st.success("✅ Relatório de Performance gerado com sucesso!")
             
             # Botões de download
