@@ -1,0 +1,13 @@
+{
+  "Volume Total da Carteira": "SUM(fact_credito_rural[valor_operacao])",
+  "Número de Operações": "COUNT(fact_credito_rural[id_operacao])",
+  "Ticket Médio": "DIVIDE([Volume Total da Carteira], [Número de Operações])",
+  "Taxa de Inadimplência": "DIVIDE(SUM(fact_credito_rural[valor_em_atraso]), [Volume Total da Carteira])",
+  "Provisão Total": "SUM(fact_credito_rural[provisao])",
+  "Índice de Cobertura": "DIVIDE([Provisão Total], SUM(fact_credito_rural[valor_em_atraso]))",
+  "Crescimento da Carteira": "\n                VAR VolumeAtual = [Volume Total da Carteira]\n                VAR VolumeAnterior = CALCULATE([Volume Total da Carteira], DATEADD(dim_tempo[data], -1, YEAR))\n                RETURN DIVIDE(VolumeAtual - VolumeAnterior, VolumeAnterior)\n                ",
+  "Operações em Atraso": "CALCULATE([Número de Operações], fact_credito_rural[dias_atraso] > 0)",
+  "Volume em Atraso": "SUM(fact_credito_rural[valor_em_atraso])",
+  "Spread Médio": "AVERAGE(fact_credito_rural[taxa_juros]) - 6.5",
+  "ROA": "DIVIDE([Volume Total da Carteira] * 0.02, [Volume Total da Carteira])"
+}

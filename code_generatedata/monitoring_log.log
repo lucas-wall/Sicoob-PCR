@@ -1,0 +1,10 @@
+2025-07-10 11:53:06,928 - INFO - === INICIANDO VERIFICAÇÃO COMPLETA ===
+2025-07-10 11:53:11,953 - INFO - Verificação de recursos: Disco 28.7%, Memória 73.2%, CPU 9.5%
+2025-07-10 11:53:11,956 - INFO - Alerta enviado [CRITICAL]: Arquivo Não Encontrado
+2025-07-10 11:53:11,957 - INFO - Alerta enviado [CRITICAL]: Arquivo Não Encontrado
+2025-07-10 11:53:11,958 - INFO - Alerta enviado [CRITICAL]: Arquivo Não Encontrado
+2025-07-10 11:53:11,959 - INFO - Verificação de arquivos: 3 arquivos verificados, 3 alertas
+2025-07-10 11:53:11,969 - ERROR - Erro ao ler log scheduler_log.log: 'utf-8' codec can't decode byte 0xe1 in position 241: invalid continuation byte
+2025-07-10 11:53:11,969 - INFO - Verificação de logs: 2 logs verificados, 0 alertas
+2025-07-10 11:53:11,970 - WARNING - Problemas detectados no sistema
+2025-07-10 11:53:11,971 - INFO - === VERIFICAÇÃO COMPLETA CONCLUÍDA ===

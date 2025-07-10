@@ -1,0 +1,25 @@
+2025-07-10 11:44:37,958 - INFO - === INICIANDO AGENDADOR ETL ===
+2025-07-10 11:44:37,958 - INFO - Configurando agendamentos...
+2025-07-10 11:44:37,959 - INFO - Agendamentos configurados:
+2025-07-10 11:44:37,959 - INFO - - Pipeline ETL: Diário às 06:00
+2025-07-10 11:44:37,959 - INFO - - Pipeline ETL: Segunda-feira às 08:00
+2025-07-10 11:44:37,959 - INFO - - Verificação de saúde: A cada 4 horas
+2025-07-10 11:44:37,960 - INFO - Notificação enviada: Agendador ETL Iniciado
+2025-07-10 11:44:37,960 - INFO - Executando verificação de saúde do sistema
+2025-07-10 11:44:37,960 - ERROR - Arquivos necessários não encontrados: script_extracao_dados.py, script_transformacao_dados.py, script_carregamento_powerbi.py
+2025-07-10 11:44:37,970 - INFO - Notificação enviada: Erro na Verificação de Saúde
+2025-07-10 11:44:37,970 - INFO - Agendador em execução. Pressione Ctrl+C para parar.
+2025-07-10 11:45:04,530 - INFO - Agendador interrompido pelo usuário
+2025-07-10 11:45:04,530 - INFO - Notificação enviada: Agendador ETL Parado
+2025-07-10 11:45:06,569 - INFO - === INICIANDO AGENDADOR ETL ===
+2025-07-10 11:45:06,570 - INFO - Configurando agendamentos...
+2025-07-10 11:45:06,570 - INFO - Agendamentos configurados:
+2025-07-10 11:45:06,570 - INFO - - Pipeline ETL: Diário às 06:00
+2025-07-10 11:45:06,570 - INFO - - Pipeline ETL: Segunda-feira às 08:00
+2025-07-10 11:45:06,570 - INFO - - Verificação de saúde: A cada 4 horas
+2025-07-10 11:45:06,571 - INFO - Notificação enviada: Agendador ETL Iniciado
+2025-07-10 11:45:06,571 - INFO - Executando verificação de saúde do sistema
+2025-07-10 11:45:06,571 - INFO - Verificação de saúde concluída com sucesso
+2025-07-10 11:45:06,572 - INFO - Agendador em execução. Pressione Ctrl+C para parar.
+2025-07-10 11:45:23,777 - INFO - Agendador interrompido pelo usuário
+2025-07-10 11:45:23,779 - INFO - Notificação enviada: Agendador ETL Parado

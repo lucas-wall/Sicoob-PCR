@@ -1,0 +1,42 @@
+{
+  "modelo_dados": {
+    "descricao": "Modelo de dados para análise de crédito rural do SICOOB",
+    "data_criacao": "2025-07-10T01:55:42.983377",
+    "versao": "1.0"
+  },
+  "tabelas": {
+    "fact_credito_rural": {
+      "tipo": "Fato",
+      "descricao": "Tabela principal com dados das operações de crédito rural",
+      "relacionamentos": [
+        "dim_tempo (data_contratacao)",
+        "dim_cooperativas (id_cooperativa)",
+        "dim_linha_credito (linha_credito)",
+        "dim_cultura (cultura)"
+      ]
+    },
+    "dim_tempo": {
+      "tipo": "Dimensão",
+      "descricao": "Dimensão temporal para análises por período"
+    },
+    "dim_cooperativas": {
+      "tipo": "Dimensão",
+      "descricao": "Informações das cooperativas do SICOOB"
+    },
+    "dim_linha_credito": {
+      "tipo": "Dimensão",
+      "descricao": "Tipos de linha de crédito rural"
+    },
+    "dim_cultura": {
+      "tipo": "Dimensão",
+      "descricao": "Culturas agrícolas financiadas"
+    }
+  },
+  "kpis_principais": [
+    "Volume Total da Carteira",
+    "Taxa de Inadimplência",
+    "Número de Operações",
+    "Ticket Médio",
+    "Provisão Total"
+  ]
+}

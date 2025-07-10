@@ -1,0 +1,59 @@
+2025-07-10 01:53:06,391 - INFO - === INICIANDO PROCESSO DE EXTRAÇÃO DE DADOS ===
+2025-07-10 01:53:06,391 - INFO - Conexão com banco de dados estabelecida com sucesso
+2025-07-10 01:53:06,392 - INFO - Iniciando extração de dados da carteira
+2025-07-10 01:53:06,500 - INFO - Extração concluída: 10000 operações extraídas
+2025-07-10 01:53:06,633 - INFO - Dados salvos em dados_carteira_extraidos.csv
+2025-07-10 01:53:06,634 - INFO - Iniciando extração de dados dos clientes
+2025-07-10 01:53:06,635 - ERROR - Erro na extração de dados dos clientes: high is out of bounds for int32
+2025-07-10 01:53:06,635 - INFO - Iniciando extração de dados das cooperativas
+2025-07-10 01:53:06,637 - INFO - Extração concluída: 50 cooperativas extraídas
+2025-07-10 01:53:06,639 - INFO - Dados salvos em dados_cooperativas_extraidos.csv
+2025-07-10 01:53:06,639 - INFO - === PROCESSO DE EXTRAÇÃO CONCLUÍDO ===
+2025-07-10 01:55:22,162 - INFO - === INICIANDO PROCESSO DE EXTRAÇÃO DE DADOS ===
+2025-07-10 01:55:22,162 - INFO - Conexão com banco de dados estabelecida com sucesso
+2025-07-10 01:55:22,163 - INFO - Iniciando extração de dados da carteira
+2025-07-10 01:55:22,268 - INFO - Extração concluída: 10000 operações extraídas
+2025-07-10 01:55:22,371 - INFO - Dados salvos em dados_carteira_extraidos.csv
+2025-07-10 01:55:22,372 - INFO - Iniciando extração de dados dos clientes
+2025-07-10 01:55:22,416 - INFO - Extração concluída: 5000 clientes extraídos
+2025-07-10 01:55:22,457 - INFO - Dados salvos em dados_clientes_extraidos.csv
+2025-07-10 01:55:22,457 - INFO - Iniciando extração de dados das cooperativas
+2025-07-10 01:55:22,459 - INFO - Extração concluída: 50 cooperativas extraídas
+2025-07-10 01:55:22,461 - INFO - Dados salvos em dados_cooperativas_extraidos.csv
+2025-07-10 01:55:22,461 - INFO - === PROCESSO DE EXTRAÇÃO CONCLUÍDO ===
+2025-07-10 01:55:37,972 - INFO - === INICIANDO PROCESSO DE TRANSFORMAÇÃO DE DADOS ===
+2025-07-10 01:55:37,972 - INFO - Carregando dados extraídos
+2025-07-10 01:55:38,041 - INFO - Dados carregados: 10000 operações, 5000 clientes, 50 cooperativas
+2025-07-10 01:55:38,041 - INFO - Iniciando limpeza de dados da carteira
+2025-07-10 01:55:38,087 - INFO - Limpeza concluída: 9939 operações após limpeza
+2025-07-10 01:55:38,087 - INFO - Iniciando limpeza de dados dos clientes
+2025-07-10 01:55:38,098 - INFO - Limpeza concluída: 4983 clientes após limpeza
+2025-07-10 01:55:38,098 - INFO - Criando tabela fato consolidada
+2025-07-10 01:55:38,269 - INFO - Tabela fato criada: 9939 registros
+2025-07-10 01:55:38,269 - INFO - Criando tabelas dimensão
+2025-07-10 01:55:38,285 - INFO - Tabelas dimensão criadas
+2025-07-10 01:55:38,285 - INFO - Salvando dados transformados
+2025-07-10 01:55:38,544 - INFO - Dados transformados salvos com sucesso
+2025-07-10 01:55:38,544 - INFO - === PROCESSO DE TRANSFORMAÇÃO CONCLUÍDO ===
+2025-07-10 01:55:42,874 - INFO - === INICIANDO PROCESSO DE CARREGAMENTO PARA POWER BI ===
+2025-07-10 01:55:42,874 - INFO - Carregando dados transformados
+2025-07-10 01:55:42,982 - INFO - Dados carregados: 9939 registros na tabela fato
+2025-07-10 01:55:42,982 - INFO - Criando medidas DAX para Power BI
+2025-07-10 01:55:42,982 - INFO - Medidas DAX criadas e salvas
+2025-07-10 01:55:42,983 - INFO - Criando documentação do modelo de dados
+2025-07-10 01:55:42,983 - INFO - Documentação do modelo criada
+2025-07-10 01:55:42,984 - INFO - Salvando dados otimizados para Power BI
+2025-07-10 01:55:42,984 - INFO - Otimizando tabela fact_credito_rural para Power BI
+2025-07-10 01:55:43,041 - INFO - Tabela fact_credito_rural otimizada
+2025-07-10 01:55:43,041 - INFO - Otimizando tabela dim_tempo para Power BI
+2025-07-10 01:55:43,045 - INFO - Tabela dim_tempo otimizada
+2025-07-10 01:55:43,046 - INFO - Otimizando tabela dim_linha_credito para Power BI
+2025-07-10 01:55:43,046 - INFO - Tabela dim_linha_credito otimizada
+2025-07-10 01:55:43,046 - INFO - Otimizando tabela dim_cultura para Power BI
+2025-07-10 01:55:43,047 - INFO - Tabela dim_cultura otimizada
+2025-07-10 01:55:43,047 - INFO - Otimizando tabela dim_cooperativas para Power BI
+2025-07-10 01:55:43,049 - INFO - Tabela dim_cooperativas otimizada
+2025-07-10 01:55:43,829 - INFO - Dados salvos em formato otimizado para Power BI
+2025-07-10 01:55:43,830 - INFO - Criando script de atualização automática
+2025-07-10 01:55:43,830 - INFO - Script de atualização criado
+2025-07-10 01:55:43,830 - INFO - === PROCESSO DE CARREGAMENTO CONCLUÍDO ===

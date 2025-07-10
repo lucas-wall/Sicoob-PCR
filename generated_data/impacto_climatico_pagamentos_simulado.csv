@@ -1,0 +1,21 @@
+Regiao,Evento_Climatico,Taxa_Inadimplencia_%
+Sudeste,Seca,3.02
+Sudeste,Excesso de Chuva,3.39
+Sudeste,Geada,2.58
+Sudeste,Normal,1.8
+Sul,Seca,3.59
+Sul,Excesso de Chuva,2.62
+Sul,Geada,2.96
+Sul,Normal,1.75
+Centro-Oeste,Seca,4.05
+Centro-Oeste,Excesso de Chuva,3.36
+Centro-Oeste,Geada,2.91
+Centro-Oeste,Normal,2.14
+Nordeste,Seca,4.94
+Nordeste,Excesso de Chuva,4.73
+Nordeste,Geada,4.26
+Nordeste,Normal,3.59
+Norte,Seca,4.34
+Norte,Excesso de Chuva,3.95
+Norte,Geada,3.49
+Norte,Normal,2.91

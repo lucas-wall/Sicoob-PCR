@@ -1,0 +1,31 @@
+{
+  "thresholds": {
+    "disk_usage_warning": 80,
+    "disk_usage_critical": 90,
+    "memory_usage_warning": 80,
+    "memory_usage_critical": 90,
+    "cpu_usage_warning": 80,
+    "cpu_usage_critical": 90,
+    "etl_timeout_minutes": 30,
+    "file_age_hours": 25
+  },
+  "email": {
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "email_user": "monitoring@sicoob.com.br",
+    "email_password": "senha_app",
+    "recipients": [
+      "ti@sicoob.com.br",
+      "gestao@sicoob.com.br"
+    ]
+  },
+  "files_to_monitor": [
+    "dados_carteira_extraidos.csv",
+    "fact_credito_rural.csv",
+    "powerbi_data/fact_credito_rural.csv"
+  ],
+  "logs_to_monitor": [
+    "etl_log.log",
+    "scheduler_log.log"
+  ]
+}
