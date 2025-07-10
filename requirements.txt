@@ -3,4 +3,6 @@ seaborn
 gradio
 plotly
 pandas
+markdown
 numpy
+reportlab

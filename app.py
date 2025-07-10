@@ -1,5 +1,3 @@
-import subprocess
-import sys
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -11,6 +9,7 @@ from datetime import datetime, timedelta
 import warnings
 import base64
 from io import BytesIO
+import markdown
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
