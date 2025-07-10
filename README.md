@@ -4,6 +4,9 @@
 
 Este é um aplicativo web moderno desenvolvido com **Streamlit** e **Gradio** para análise estratégica da carteira de crédito rural do SICOOB. O sistema oferece uma interface intuitiva e responsiva para visualização de dados, análise de KPIs e previsão de risco de inadimplência.
 
+📜 &nbsp;Acesse o link público deste projeto:
+- [SICOOB - Projeto de Crédito Rural](https://sicoob-pcr-lucaswall.streamlit.app)
+<br>
 ## ✨ Funcionalidades Principais
 
 ### 📊 Dashboard Executivo
