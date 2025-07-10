@@ -1,0 +1,39 @@
+﻿Class_ID;Level;Description;Descricao;Color
+1;1;Forest;Floresta;#32a65e
+3;2;Forest Formation;Formação Florestal;#1f8d49
+4;2;Savanna Formation;Formação Savânica;#7dc975
+5;2;Mangrove;Mangue;#04381d
+6;2;Floodable Forest (beta);Floresta Alagável (beta);#026975
+49;2;Wooded Sandbank Vegetation;Restinga Arbórea;#02d659
+10;1;Non Forest Natural Formation;Formação Natural não Florestal;#ad975a
+11;2;Wetland;Campo Alagado e Área Pantanosa;#519799
+12;2;Grassland;Formação Campestre;#d6bc74
+32;2; Hypersaline Tidal Flat;Apicum;#fc8114
+29;2; Rocky Outcrop;Afloramento Rochoso;#ffaa5f
+50;2; Herbaceous Sandbank Vegetation;Restinga Herbácea;#ad5100
+13;2; Other non Forest Formations;Outras Formações não Florestais;#d89f5c
+14;1; Farming;Agropecuária;#FFFFB2
+15;2; Pasture;Pastagem;#edde8e
+18;2; Agriculture;Agricultura;#E974ED
+19;3; Temporary Crop;Lavoura Temporária;#C27BA0
+39;4; Soybean;Soja;#f5b3c8
+20;4; Sugar cane;Cana;#db7093
+40;4; Rice;Arroz;#c71585
+62;4; Cotton (beta);Algodão (beta);#ff69b4
+41;4; Other Temporary Crops;Outras Lavouras Temporárias;#f54ca9
+36;3; Perennial Crop;Lavoura Perene;#d082de
+46;4; Coffee;Café;#d68fe2
+47;4; Citrus;Citrus;#9932cc
+35;4; Palm Oil (beta);Dendê (beta);#9065d0
+48;4; Other Perennial Crops;Outras Lavouras Perenes;#e6ccff
+9;2; Forest Plantation;Silvicultura;#7a5900
+21;2; Mosaic of Uses;Mosaico de Usos;#ffefc3
+22;1; Non vegetated area;Área não Vegetada;#d4271e
+23;2; Beach, Dune and Sand Spot;Praia, Duna e Areal;#ffa07a
+24;2; Urban Area;Área Urbanizada;#d4271e
+30;2; Mining;Mineração;#9c0027
+25;2; Other non Vegetated Areas;Outras Áreas não Vegetadas;#db4d4f
+26;1; Water;Corpo D'água;#0000FF
+33;2; River, Lake and Ocean;Rio, Lago e Oceano;#2532e4
+31;2; Aquaculture;Aquicultura;#091077
+27;1; Not Observed;Não observado;#ffffff

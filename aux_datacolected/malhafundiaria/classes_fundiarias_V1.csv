@@ -1,0 +1,77 @@
+Value,Label,Category,Color
+10,Terra Indígena Declarada,Terra Indígena Declarada,#d7e10f
+11,Terra Indígena Não Declarada,Terra Indígena Não Declarada,#f5ff82
+12,Gleba Pública,Gleba Pública,#a55000
+13,Área Militar,Área Militar,#f519f5
+19,Sobreposição entre terras públicas,Zonas de Sobreposição,#beb9c3
+21,Unidade de Conservação de Proteção Integral (UCPI),UCPI,#1e692d
+22,Unidade de Conservação de Uso Sustentável (UCUS),UCUS,#239b00
+23,Unidade de Conservação APA (UCUS-APA),UCUS-APA,#46af7d
+29,Sobreposição entre terras sob regime do SNUC,Zonas de Sobreposição,#beb9c3
+31,Terra Indígena Declarada/UCPI,Zonas de Sobreposição,#beb9c3
+32,Terra Indígena Declarada/UCUS,Zonas de Sobreposição,#beb9c3
+33,Terra Indígena Não Declarada/UCPI,Zonas de Sobreposição,#beb9c3
+34,Terra Indígena Não Declarada/UCUS,Zonas de Sobreposição,#beb9c3
+35,Terra Indígena Declarada /UCUSAPA,Zonas de Sobreposição,#beb9c3
+36,Terra Indígena Não Declarada /UCUSAPA,Zonas de Sobreposição,#beb9c3
+39,Outras sobreposições entre terras públicas e terras sob regime do SNUC,Zonas de Sobreposição,#beb9c3
+41,Áreas Urbanas,Áreas Urbanas,#fa8200
+51,Massas d'água,Massas d'água,#37b9eb
+61,Imóvel Rural Privado,Imóvel Rural Privado,#412da5
+62,Território quilombola,Território Quilombola,#000000
+63,Assentamento,Assentamento,#f50505
+69,Sobreposição entre terras privadas,Zonas de Sobreposição,#beb9c3
+71,Terra Indígena Declarada/Imóvel Rural Privado,Zonas de Sobreposição,#beb9c3
+72,Terra Indígena Não Declarada/Imóvel Rural Privado,Zonas de Sobreposição,#beb9c3
+73,Terra Indígena Declarada/Assentamento,Zonas de Sobreposição,#beb9c3
+74,Terra Indígena Não Declarada/Assentamento,Zonas de Sobreposição,#beb9c3
+79,Outras sobreposições entre terras públicas e terras privadas,Zonas de Sobreposição,#beb9c3
+81,UCPI/Imóvel Rural Privado,Zonas de Sobreposição,#beb9c3
+82,UCUS/Imóvel Rural Privado,Zonas de Sobreposição,#beb9c3
+83,UCPI/Assentamento,Zonas de Sobreposição,#beb9c3
+84,UCUS/Assentamento,Zonas de Sobreposição,#beb9c3
+85,UCPI/Território Quilombola,Zonas de Sobreposição,#beb9c3
+86,UCUS/Território Quilombola,Zonas de Sobreposição,#beb9c3
+87,UCUSAPA/Assentamento,Zonas de Sobreposição,#beb9c3
+88,UCUSAPA/Imóvel Rural Privado,Zonas de Sobreposição,#beb9c3
+89,Outras sobreposições entre terras sob regime do SNUC e terras privadas,Zonas de Sobreposição,#beb9c3
+99,"Outras sobreposições entre terras sob regime do SNUC, privadas e públicas",Zonas de Sobreposição,#beb9c3
+101,Áreas Sem Registro Fundiário Georreferenciado,ASRFG,#f58c8c
+1010,Terra Indígena Declarada - Com CAR,Terra Indígena Declarada - Com CAR,#acb40c
+1110,Terra Indígena Não Declarada - Com CAR,Terra Indígena Não Declarada - Com CAR,#efff35
+1210,Gleba Pública - Com CAR,Gleba Pública - Com CAR,#844000
+1310,Área Militar - Com CAR,Área Militar - Com CAR,#cf09cf
+1910,Sobreposição entre terras públicas - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+2110,Unidade de Conservação de Proteção Integral (UCPI) - Com CAR,UCPI - Com CAR,#185424
+2210,Unidade de Conservação de Uso Sustentável (UCUS) - Com CAR,UCUS - Com CAR,#1c7c00
+2310,Unidade de Conservação APA (UCUS-APA) - Com CAR,UCUS-APA - Com CAR,#388c64
+2910,Sobreposição entre terras sob regime do SNUC - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+3110,Terra Indígena Declarada/UCPI - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+3210,Terra Indígena Declarada/UCUS - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+3310,Terra Indígena Não Declarada/UCPI - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+3410,Terra Indígena Não Declarada/UCUS - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+3510,Terra Indígena Declarada /UCUSAPA - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+3610,Terra Indígena Não Declarada /UCUSAPA - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+3910,Outras sobreposições entre terras públicas e terras sob regime do SNUC - com Car,Zonas de Sobreposição,#beb9c3
+4110,Áreas Urbanas - Com CAR,Áreas Urbanas - Com CAR,#c86800
+5110,Massas d'água - Com CAR,Massas d'água - Com CAR,#159ed3
+6110,Imóvel Rural Privado - Com CAR,Imóvel Rural Privado - Com CAR,#342484
+6210,Território quilombola - Com CAR,Território Quilombola - Com CAR,#000000
+6310,Assentamento - Com CAR,Assentamento - Com CAR,#c40404
+6910,Sobreposição entre terras privadas - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+7110,Terra Indígena Declarada/Imóvel Rural Privado - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+7210,Terra Indígena Não Declarada/Imóvel Rural Privado - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+7310,Terra Indígena Declarada/Assentamento - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+7410,Terra Indígena Não Declarada/Assentamento - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+7910,Outras sobreposições entre terras públicas e terras privadas - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8110,UCPI/Imóvel Rural Privado - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8210,UCUS/Imóvel Rural Privado - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8310,UCPI/Assentamento - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8410,UCUS/Assentamento - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8510,UCPI/Território Quilombola - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8610,UCUS/Território Quilombola - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8710,UCUSAPA/Assentamento - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8810,UCUSAPA/Imóvel Rural Privado - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+8910,Outras sobreposições entre terras sob regime do SNUC e terras privadas - Com CAR,Zonas de Sobreposição - Com CAR,#9890a0
+9910,"Outras sobreposições entre terras sob regime do SNUC, privadas e públicas - Com CAR",Zonas de Sobreposição - Com CAR,#9890a0
+10110,Áreas Sem Registro Fundiário Georreferenciado - Com CAR,ASRFG - Com CAR,#ef4545
