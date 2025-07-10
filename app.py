@@ -30,7 +30,7 @@ st.markdown("""
     /* Reset e configurações globais */
     .main {
         font-family: "Inter", sans-serif;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background: linear-gradient(135deg, #333333 0%, #1a1a1a 100%);
     }
     
     /* Header personalizado */
@@ -104,7 +104,7 @@ st.markdown("""
     
     /* Seções */
     .section-container {
-        background: white;
+        background: linear-gradient(90deg, #006341 0%, #00A0DF 100%);
         padding: 2rem;
         border-radius: 20px;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
@@ -503,23 +503,6 @@ def main_dashboard():
         use_container_width=True,
         hide_index=True
     )
-    
-    # Seção de Relatórios
-    st.markdown("## 📄 Relatórios e Documentação")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        if st.button("📊 Relatório de EDA", use_container_width=True):
-            st.info("Relatório de Análise Exploratória de Dados disponível para download.")
-    
-    with col2:
-        if st.button("🤖 Relatório de Modelagem", use_container_width=True):
-            st.info("Relatório de Modelagem Preditiva disponível para download.")
-    
-    with col3:
-        if st.button("📈 Guia do Power BI", use_container_width=True):
-            st.info("Guia detalhado de implementação no Power BI disponível.")
 
 # Função de previsão com Gradio
 def create_prediction_interface():
@@ -731,7 +714,7 @@ def main():
         
         st.markdown("""
         <div class="section-container">
-            <p style="font-size: 1.1rem; color: #666; text-align: center; margin-bottom: 2rem;">
+            <p style="font-size: 1.1rem; color: white; text-align: center; margin-bottom: 2rem;">
                 Utilize nossa ferramenta de inteligência artificial para avaliar o risco de inadimplência 
                 de operações de crédito rural. Insira os parâmetros da operação e obtenha uma análise 
                 detalhada com recomendações personalizadas.
@@ -745,8 +728,8 @@ def main():
         # Renderizar interface Gradio usando iframe
         st.markdown("### 🤖 Interface de Previsão de Risco")
         st.markdown("""
-        <div style="background: white; padding: 2rem; border-radius: 16px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);">
-            <p style="text-align: center; color: #666; margin-bottom: 1rem;">
+        <div style="background: linear-gradient(90deg, #006341 0%, #00A0DF 100%); padding: 2rem; border-radius: 16px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);">
+            <p style="text-align: center; color: white; margin-bottom: 1rem;">
                 A interface de previsão será carregada abaixo. Caso não apareça, 
                 <a href="http://localhost:7860" target="_blank">clique aqui para abrir em nova aba</a>.
             </p>
@@ -838,11 +821,15 @@ def main():
         with col1:
             st.markdown("""
             <div class="section-container">
-                <h3 style="color: #006341;">🎯 Objetivo</h3>
+                <h3 style="color: white;">🎯 Objetivo</h3>
                 <p>Este sistema foi desenvolvido para demonstrar capacidades avançadas de análise de dados 
                 e modelagem preditiva aplicadas ao setor de crédito rural do SICOOB.</p>
-                
-                <h3 style="color: #006341;">🛠️ Tecnologias Utilizadas</h3>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div class="section-container">
+                <h3 style="color: white;">🛠️ Tecnologias Utilizadas</h3>
                 <ul>
                     <li><strong>Streamlit:</strong> Interface web interativa</li>
                     <li><strong>Gradio:</strong> Interface de machine learning</li>
@@ -856,7 +843,7 @@ def main():
         with col2:
             st.markdown("""
             <div class="section-container">
-                <h3 style="color: #006341;">📊 Funcionalidades</h3>
+                <h3 style="color: white;">📊 Funcionalidades</h3>
                 <ul>
                     <li>Dashboard executivo com KPIs principais</li>
                     <li>Análises temporais e geográficas</li>
@@ -864,8 +851,12 @@ def main():
                     <li>Sistema de previsão de risco</li>
                     <li>Interface responsiva e moderna</li>
                 </ul>
-                
-                <h3 style="color: #006341;">🔮 Modelo Preditivo</h3>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown("""
+            <div class="section-container">
+                <h3 style="color: white;">🔮 Modelo Preditivo</h3>
                 <p>O modelo de previsão considera múltiplos fatores:</p>
                 <ul>
                     <li>Valor e prazo da operação</li>
@@ -878,8 +869,8 @@ def main():
         
         st.markdown("""
         <div class="section-container">
-            <h3 style="color: #006341; text-align: center;">👨‍💻 Desenvolvido para o Processo Seletivo SICOOB</h3>
-            <p style="text-align: center; font-size: 1.1rem; color: #666;">
+            <h3 style="color: white; text-align: center;">👨‍💻 Desenvolvido para o Processo Seletivo SICOOB</h3>
+            <p style="text-align: center; font-size: 1.1rem; color: white;">
                 Este sistema demonstra competências em análise de dados, desenvolvimento de interfaces 
                 modernas e aplicação de técnicas de machine learning no contexto do agronegócio.
             </p>
